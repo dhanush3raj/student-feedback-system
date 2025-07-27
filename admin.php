@@ -4,15 +4,15 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: index.php");
     exit();
 }
-include 'db.php';
 
-$result = mysqli_query($conn, "SELECT * FROM feedbacks");
+include 'db.php';
+$stmt = $conn->query("SELECT * FROM feedbacks");
 
 echo "<h2>Admin Panel - Feedbacks</h2>";
 echo "<table border='1'>
 <tr><th>ID</th><th>Subject</th><th>Rating</th><th>Comments</th></tr>";
 
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<tr>
             <td>{$row['id']}</td>
             <td>{$row['subject']}</td>

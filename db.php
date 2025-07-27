@@ -1,11 +1,15 @@
 <?php
-$host = 'db4free.net'; // Update with real credentials later
-$user = 'your_username';
-$pass = 'your_password';
-$db   = 'your_database';
+try {
+    $conn = new PDO("sqlite:feedback.db");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$conn = mysqli_connect($host, $user, $pass, $db);
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+    $conn->exec("CREATE TABLE IF NOT EXISTS feedbacks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        subject TEXT,
+        rating INTEGER,
+        comments TEXT
+    )");
+} catch (PDOException $e) {
+    echo "Connection failed: " . $e->getMessage();
 }
 ?>

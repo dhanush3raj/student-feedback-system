@@ -4,7 +4,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'student') {
     header("Location: index.php");
     exit();
 }
-include 'db.php';
 ?>
 <!DOCTYPE html>
 <html>
